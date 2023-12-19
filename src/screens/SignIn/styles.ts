@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Text, TextInput, TouchableOpacity, KeyboardAvoidingView, View } from "react-native";
+import { Text, TextInput, KeyboardAvoidingView, View } from "react-native";
 
 export const Container = styled(KeyboardAvoidingView)`
   flex: 1;

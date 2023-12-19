@@ -1,7 +1,7 @@
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
-import { Platform } from "react-native";
+import { Alert, Platform, View } from "react-native";
 import Button from "~/components/Button";
 import useAuthStore from "../../lib/stores/useAuthStore";
 
@@ -45,6 +45,8 @@ const SignIn = () => {
     const auth = await signUp(email, password);
 
     if (auth) {
+      Alert.alert("Conta criada com sucesso!");
+
       navigation.navigate("Home");
     }
   };
@@ -69,8 +71,12 @@ const SignIn = () => {
 
   return (
     <S.Container behavior={Platform.OS === "ios" ? "padding" : "height"}>
-      <S.Title>Criar conta</S.Title>
-      <S.SubTitle>Seja bem-vindo! Complete as informações abaixo para criar sua conta.</S.SubTitle>
+      <View>
+        <S.Title>Criar conta</S.Title>
+        <S.SubTitle>
+          Seja bem-vindo! Complete as informações abaixo para criar sua conta.
+        </S.SubTitle>
+      </View>
 
       <Input
         selectTextOnFocus

@@ -1,12 +1,13 @@
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
-import { Platform } from "react-native";
+import { Alert, Image, Platform, View } from "react-native";
 import Button from "~/components/Button";
 import useAuthStore from "../../lib/stores/useAuthStore";
+import Logo from "~/assets/logo.png";
+import Input from "~/components/Form/Input";
 
 import S from "./styles";
-import Input from "~/components/Form/Input";
 
 const SignIn = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
@@ -45,6 +46,8 @@ const SignIn = () => {
     const auth = await signIn(email, password);
 
     if (auth) {
+      Alert.alert("Logado com sucesso!");
+
       navigation.navigate("Home");
     }
   };
@@ -69,8 +72,13 @@ const SignIn = () => {
 
   return (
     <S.Container behavior={Platform.OS === "ios" ? "padding" : "height"}>
-      <S.Title>Bem-vindo de Volta!</S.Title>
-      <S.SubTitle>Por favor, faça o login para acessar sua conta.</S.SubTitle>
+      <Image source={Logo} style={{ width: 250, height: 100, marginBottom: 40 }} />
+
+      <View>
+        <S.Title>Bem-vindo de Volta!</S.Title>
+
+        <S.SubTitle>Por favor, faça o login para acessar sua conta.</S.SubTitle>
+      </View>
 
       <Input
         selectTextOnFocus
