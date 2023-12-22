@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { View, Text, TouchableOpacity, Image, TextInput } from "react-native";
+import { View, Text, TouchableOpacity, Image, TextInput, FlatList } from "react-native";
 
 export const Container = styled(View)`
   flex: 1;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
-  margin: 0 auto;
+  top: 60px;
 `;
 
 export const Button = styled(TouchableOpacity)`
@@ -26,8 +26,6 @@ export const TextButton = styled(Text)`
 
 export const Header = styled(View)`
   width: 100%;
-  position: absolute;
-  top: 60px;
 `;
 
 export const SectionLogo = styled(View)`
@@ -44,11 +42,14 @@ export const SectionSearch = styled(View)`
   width: 100%;
   margin-top: 20px;
   flex-direction: row-reverse;
-  /* justify-content: space-between; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const InputSearch = styled(TextInput)`
   width: 75%;
+  height: 42px;
   border-radius: 6px;
   padding: 10px 8px;
   border-width: 1px;
@@ -59,16 +60,37 @@ export const InputSearch = styled(TextInput)`
 `;
 
 export const ButtonSearch = styled(TouchableOpacity)`
-  width: 20%;
+  width: 15%;
+  height: 42px;
   background-color: #5900c5;
   border-width: 1px;
-  height: 55px;
   border-radius: 6px;
   align-items: center;
   justify-content: center;
   padding: 0 16px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
+`;
+
+export const SectionCategory = styled(FlatList).attrs({
+  contentContainerStyle: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    marginTop: 24,
+    marginBottom: 24,
+  },
+})`
+  width: 100%;
+`;
+
+export const TitleHighlights = styled(Text)`
+  color: #5900c5;
+  font-size: 22px;
+  font-weight: 500;
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
 `;
 
 export default {
@@ -81,4 +103,6 @@ export default {
   SectionSearch,
   InputSearch,
   ButtonSearch,
+  SectionCategory,
+  TitleHighlights,
 };
