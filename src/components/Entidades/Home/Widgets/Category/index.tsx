@@ -1,11 +1,8 @@
-import React, { FC, ReactElement, ReactNode } from "react";
-import { View, Text, Image, Alert } from "react-native";
-import S from "./styles";
+import React, { FC, ReactElement } from "react";
+import { Image, Alert } from "react-native";
+import { ICategory } from "../../Models";
 
-interface ICategory {
-  title: string;
-  icon: any;
-}
+import S from "./styles";
 
 const Category: FC<ICategory> = ({ title, icon }): ReactElement => {
   return (

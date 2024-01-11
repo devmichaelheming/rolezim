@@ -1,16 +1,17 @@
 import styled from "styled-components";
-import { View, Text, TouchableOpacity, Image, TextInput, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, Image, TextInput, FlatList, Dimensions } from "react-native";
+import theme from "~/styles/theme";
 
 export const Container = styled(View)`
-  flex: 1;
+  width: 95%;
+  top: ${Dimensions.get("window").height * 0.1}px;
   align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  top: 60px;
+  justify-content: center;
+  margin: 0 auto;
 `;
 
 export const Button = styled(TouchableOpacity)`
-  background-color: #5900c5;
+  background-color: ${theme.primary};
   height: 55px;
   border-radius: 6px;
   align-items: center;
@@ -26,16 +27,14 @@ export const TextButton = styled(Text)`
 
 export const Header = styled(View)`
   width: 100%;
+  height: 190px;
+  position: fixed;
+  top: 0px;
+  z-index: 2;
 `;
 
-export const SectionLogo = styled(View)`
-  justify-content: center;
-  align-items: center;
-`;
-
-export const Logo = styled(Image)`
-  width: 130px;
-  height: 50px;
+export const Body = styled(View)`
+  margin-bottom: 320px;
 `;
 
 export const SectionSearch = styled(View)`
@@ -44,11 +43,11 @@ export const SectionSearch = styled(View)`
   flex-direction: row-reverse;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
 export const InputSearch = styled(TextInput)`
-  width: 75%;
+  width: 80%;
   height: 42px;
   border-radius: 6px;
   padding: 10px 8px;
@@ -60,9 +59,9 @@ export const InputSearch = styled(TextInput)`
 `;
 
 export const ButtonSearch = styled(TouchableOpacity)`
-  width: 15%;
+  width: 20%;
   height: 42px;
-  background-color: #5900c5;
+  background-color: ${theme.primary};
   border-width: 1px;
   border-radius: 6px;
   align-items: center;
@@ -72,25 +71,46 @@ export const ButtonSearch = styled(TouchableOpacity)`
   border-bottom-left-radius: 0px;
 `;
 
-export const SectionCategory = styled(FlatList).attrs({
+export const SectionCategory = styled(View)`
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 24px 0;
+`;
+
+export const TitleSection = styled(Text)`
+  color: ${theme.primary};
+  font-size: 18px;
+  font-weight: 500;
+  width: 95%;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 6px;
+  padding-bottom: 10px;
+`;
+
+export const BodySection = styled(FlatList).attrs({
   contentContainerStyle: {
-    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-evenly",
-    marginTop: 24,
+    justifyContent: "space-between",
+    marginTop: 12,
     marginBottom: 24,
   },
 })`
   width: 100%;
 `;
 
-export const TitleHighlights = styled(Text)`
-  color: #5900c5;
-  font-size: 22px;
-  font-weight: 500;
-  width: 90%;
+export const ContainerSection = styled(View)`
+  width: 100%;
+  flex-grow: 1;
+`;
+
+export const BodyItemSection = styled(View)`
+  width: 50%;
   display: flex;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export default {
@@ -98,11 +118,13 @@ export default {
   Button,
   TextButton,
   Header,
-  SectionLogo,
-  Logo,
   SectionSearch,
   InputSearch,
   ButtonSearch,
   SectionCategory,
-  TitleHighlights,
+  TitleSection,
+  BodySection,
+  ContainerSection,
+  BodyItemSection,
+  Body,
 };

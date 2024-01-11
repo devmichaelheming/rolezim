@@ -1,5 +1,6 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
+import theme from "~/styles/theme";
 
 export const Container = styled(TouchableOpacity)`
   display: flex;
@@ -12,7 +13,7 @@ export const Container = styled(TouchableOpacity)`
 export const SectionIcon = styled(View)`
   width: 55px;
   height: 55px;
-  border: 0.5px solid #5900c5;
+  border: 0.5px solid ${theme.primary};
   border-radius: 100%;
   display: flex;
   align-items: center;
