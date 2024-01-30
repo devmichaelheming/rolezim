@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
 import { Alert, Platform, View } from "react-native";
 import Button from "~/components/Button";
-import useAuthStore from "../../../lib/stores/useAuthStore";
+import useAuthStore from "~/stores/useAuthStore";
 
 import S from "./styles";
 import Input from "~/components/Form/Input";

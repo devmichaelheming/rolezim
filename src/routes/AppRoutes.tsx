@@ -8,20 +8,45 @@ import Favorite from "../screens/Favorite";
 import theme from "~/styles/theme";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import EventDetail from "~/components/Entidades/EventDetail";
+import { useIsFocused } from "@react-navigation/native";
 
 const AppRoutes = () => {
   const Tab = createBottomTabNavigator();
   const Stack = createNativeStackNavigator();
+  const isFocused = useIsFocused();
 
-  const HomeStack = () => (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-      <Stack.Screen name="EventDetail" component={EventDetail} options={{ headerShown: false }} />
-    </Stack.Navigator>
-  );
+  const HomeStack = ({ route }: any) => {
+    return (
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "#5900c5",
+          },
+          headerTitleStyle: {
+            color: "#FFF",
+          },
+          headerTintColor: "#FFF",
+        }}
+      >
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="EventDetail"
+          component={EventDetail}
+          options={{ title: "Detalhes do evento" }}
+        />
+      </Stack.Navigator>
+    );
+  };
 
   return (
     <Tab.Navigator
+      initialRouteName="HomeTab"
       screenOptions={{
         tabBarStyle: {
           backgroundColor: theme.primary,
@@ -34,9 +59,10 @@ const AppRoutes = () => {
       <Tab.Screen
         name="HomeTab"
         component={HomeStack}
-        options={{
+        options={({ route }) => ({
           tabBarShowLabel: false,
           headerShown: false,
+          tabBarVisible: !isFocused, // Oculta a barra quando estiver na tela EventDetail
           tabBarIcon({ focused, size, color }) {
             if (focused) {
               return <Ionicons size={26} color="#FFF" name="home" style={{ marginTop: 15 }} />;
@@ -46,7 +72,7 @@ const AppRoutes = () => {
               <Ionicons size={size} color="#FFF" name="home-outline" style={{ marginTop: 15 }} />
             );
           },
-        }}
+        })}
       />
 
       <Tab.Screen

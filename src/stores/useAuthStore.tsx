@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
-import { authService } from "../../services/authServices";
+import { authService } from "../services/authServices";
 
 export interface IUser {
   id: string;

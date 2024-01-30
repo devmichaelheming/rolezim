@@ -34,7 +34,7 @@ export const Header = styled(View)`
 `;
 
 export const Body = styled(View)`
-  margin-bottom: 320px;
+  margin-bottom: 280px;
 `;
 
 export const SectionSearch = styled(View)`

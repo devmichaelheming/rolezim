@@ -9,7 +9,7 @@ export interface ICategory {
 export interface IRecents {
   id: string;
   title: string;
-  data?: string;
+  date?: string;
   location: string;
   img: HTMLImageElement;
 }

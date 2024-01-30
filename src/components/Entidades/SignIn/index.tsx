@@ -7,7 +7,7 @@ import Logo from "~/assets/logo.png";
 import Input from "~/components/Form/Input";
 
 import S from "./styles";
-import useAuthStore from "../../../lib/stores/useAuthStore";
+import useAuthStore from "~/stores/useAuthStore";
 
 const SignIn = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();

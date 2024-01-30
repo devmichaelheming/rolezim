@@ -5,7 +5,7 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { VerifyErroCode } from "../utils/verifyCodeError";
-import { IUser } from "../lib/stores/useAuthStore";
+import { IUser } from "~/stores/useAuthStore";
 import { auth } from "./firebaseConfig";
 import { Alert } from "react-native";
 

@@ -4,7 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 import S from "./styles";
 import { ItemProps } from "~/Models";
 
-const Item: FC<ItemProps> = ({ title, img, location, data }): ReactElement => {
+const Item: FC<ItemProps> = ({ title, img, location, date }): ReactElement => {
   return (
     <S.Container>
       <S.SectionIcon>
@@ -15,7 +15,7 @@ const Item: FC<ItemProps> = ({ title, img, location, data }): ReactElement => {
         <S.Details>
           <S.Title>{title}</S.Title>
 
-          {data && <S.TitleData>{data}</S.TitleData>}
+          {date && <S.TitleData>{date}</S.TitleData>}
 
           {location && <S.TitleLocation>{location}</S.TitleLocation>}
         </S.Details>

@@ -2,7 +2,7 @@ import React from "react";
 import { Text } from "react-native";
 
 import S from "./styles";
-import useAuthStore from "../../../lib/stores/useAuthStore";
+import useAuthStore from "~/stores/useAuthStore";
 
 const Home = () => {
   const { signOut } = useAuthStore();
