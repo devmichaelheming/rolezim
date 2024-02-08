@@ -30,7 +30,7 @@ export function calculateTimeRemaining(date: string) {
   }
 
   const days = targetDate.diff(currentDate, "day");
-  const hours = targetDate.diff(currentDate, "hour");
+  const hours = targetDate.diff(currentDate, "hour") % 24; // Limita a 24 horas
   const minutes = targetDate.diff(currentDate, "minute") % 60;
   const seconds = targetDate.diff(currentDate, "second") % 60;
 

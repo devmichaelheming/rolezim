@@ -25,7 +25,7 @@ export const Time = styled(View)`
   background-color: #5900c5;
   height: 60px;
   width: 60px;
-  border-radius: 200%;
+  border-radius: 50px;
   align-items: center;
   justify-content: center;
 `;

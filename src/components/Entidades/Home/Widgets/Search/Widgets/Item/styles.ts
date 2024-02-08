@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
 
-export const Container = styled(View)`
+export const Container = styled(TouchableOpacity)`
   width: 100%;
   display: flex;
   align-items: center;
@@ -48,7 +48,7 @@ export const Title = styled(Text)`
   padding-bottom: 4px;
 `;
 
-export const Details = styled(TouchableOpacity)`
+export const Details = styled(View)`
   flex-direction: column;
 `;
 

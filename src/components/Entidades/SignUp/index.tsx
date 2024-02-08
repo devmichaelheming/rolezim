@@ -1,7 +1,7 @@
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
-import { Alert, Platform, View } from "react-native";
+import { ActivityIndicator, Alert, Platform, View } from "react-native";
 import Button from "~/components/Button";
 import useAuthStore from "~/stores/useAuthStore";
 
@@ -17,6 +17,7 @@ const SignIn = () => {
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateInputs = () => {
     let emailError = "";
@@ -34,6 +35,7 @@ const SignIn = () => {
   };
 
   const handleSignUp = async () => {
+    setIsLoading(true);
     const { email: emailError, password: passwordError } = validateInputs();
 
     setError({ email: emailError, password: passwordError });
@@ -47,7 +49,8 @@ const SignIn = () => {
     if (auth) {
       Alert.alert("Conta criada com sucesso!");
 
-      navigation.navigate("Home");
+      navigation.navigate("SignIn");
+      setIsLoading(false);
     }
   };
 
@@ -100,7 +103,7 @@ const SignIn = () => {
       />
 
       <Button onPress={() => handleSignUp()} style={{ marginTop: 10 }}>
-        Cadastrar
+        {isLoading ? <ActivityIndicator size="small" /> : "Cadastrar"}
       </Button>
 
       <S.SignInSection>

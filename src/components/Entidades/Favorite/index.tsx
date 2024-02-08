@@ -1,14 +1,13 @@
 import React from "react";
 
 import S from "./styles";
-import useAuthStore from "~/stores/useAuthStore";
-import { dataHighlightsMock } from "~/components/Entidades/Home/__mocks__/listHighlights";
 import Item from "./Widgets/Item";
-import { Image } from "react-native";
 import EmptyImg from "~/assets/empty.png";
+import useEventStore from "~/stores/useEventStore";
+import { Image } from "react-native";
 
 const Favorite = () => {
-  const { signOut } = useAuthStore();
+  const { favoriteEvents } = useEventStore();
 
   return (
     <S.Container>
@@ -17,11 +16,11 @@ const Favorite = () => {
       </S.Header>
 
       <S.ContainerListFavorite>
-        {dataHighlightsMock.length > 0 ? (
+        {favoriteEvents.length > 0 ? (
           <S.ListFavorite
-            data={dataHighlightsMock}
+            data={favoriteEvents}
             keyExtractor={(item) => String(item.id)}
-            renderItem={({ item }) => <Item {...item} />}
+            renderItem={({ item }) => <Item item={item} />}
           />
         ) : (
           <S.ListEmpty>

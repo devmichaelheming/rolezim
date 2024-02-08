@@ -2,11 +2,11 @@ import React, { FC, ReactElement } from "react";
 
 import S from "./styles";
 
-interface DescriptionProps {
+interface IDescription {
   description: string;
 }
 
-const Description: FC<DescriptionProps> = ({ description }): ReactElement => {
+const Description: FC<IDescription> = ({ description }): ReactElement => {
   return (
     <S.InfoDescription>
       <S.TitleDescription>Descrição do evento</S.TitleDescription>

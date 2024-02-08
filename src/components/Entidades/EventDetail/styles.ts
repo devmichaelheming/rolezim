@@ -2,10 +2,17 @@ import { ScrollView, Text, TouchableOpacity } from "react-native";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
-export const Container = styled(ScrollView)``;
+export const Container = styled(View)``;
 
-export const InfoEvent = styled(View)`
+export const InfoEvent = styled(ScrollView)`
   padding: 10px;
+  margin-bottom: 250px;
+`;
+
+export const SectionTitle = styled(View)`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const TitleEvent = styled(Text)`
@@ -15,6 +22,10 @@ export const TitleEvent = styled(Text)`
   color: #3e3e3e;
   text-align: left;
   padding-top: 10px;
+`;
+
+export const SectionFavorite = styled(TouchableOpacity)`
+  padding-right: 10px;
 `;
 
 export const TitleHeader = styled(Text)`
@@ -50,6 +61,7 @@ export const ValueTotal = styled(Text)`
 export const SectionBuy = styled(View)`
   align-items: center;
   justify-content: center;
+  margin-bottom: 16px;
 `;
 
 export const ButtonBuy = styled(TouchableOpacity)`
@@ -70,7 +82,9 @@ export const TextBuy = styled(Text)`
 export default {
   Container,
   InfoEvent,
+  SectionTitle,
   TitleEvent,
+  SectionFavorite,
   TitleHeader,
   ListLotes,
   SectionTotal,

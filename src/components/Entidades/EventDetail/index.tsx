@@ -1,5 +1,5 @@
-import React, { FC, ReactElement, useEffect, useState } from "react";
-import { Alert, Image, View } from "react-native";
+import React, { FC, ReactElement, useEffect, useMemo, useState, useCallback } from "react";
+import { Alert, View } from "react-native";
 import useEventStore from "~/stores/useEventStore";
 import S from "./styles";
 import { ItemProps, LoteProps } from "~/Models";
@@ -9,35 +9,40 @@ import Description from "./Widgets/Description";
 import Timer from "./Widgets/Timer";
 import Lotes from "./Widgets/Lotes";
 import { formatandoMoeda } from "../../../utils/funcoes";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useFocusEffect } from "@react-navigation/native";
+import Image from "~/components/Image";
 
 const EventDetail: FC = (): ReactElement => {
-  const { event } = useEventStore();
+  const { event, favoriteEvents, addEventToFavorites, removeEventToFavorites } = useEventStore();
   const [eventDetails, setEventDetails] = useState<ItemProps>({} as ItemProps);
   const [listLotes, setListLotes] = useState<Array<LoteProps>>([]);
-  const [quantity, setQuantity] = useState<Record<string, number>>({}); // Novo estado
+  const [quantity, setQuantity] = useState<Record<string, number>>({});
   const [valorTotal, setValorTotal] = useState(0);
+  const [isFavorited, setIsFavorited] = useState(false);
 
-  const updateLoteCount = (idEvent: string, title: string, count: number) => {
+  const updateLoteCount = useCallback((idEvent: string, title: string, count: number) => {
     setQuantity((prevQuantity) => {
       const updatedQuantity = { ...prevQuantity };
-
-      // Adicione ou atualize a quantidade do lote com base no título
-      if (updatedQuantity[title]) {
-        updatedQuantity[title] += count;
-      } else {
-        updatedQuantity[title] = count;
-      }
-
+      updatedQuantity[title] = (updatedQuantity[title] || 0) + count;
       return updatedQuantity;
     });
-  };
+  }, []);
+
+  const handleFavoriteEvents = useCallback(() => {
+    setIsFavorited(!isFavorited);
+    if (event !== null) {
+      if (!isFavorited) {
+        addEventToFavorites({ ...event });
+      } else {
+        removeEventToFavorites(event.id);
+      }
+    }
+  }, [event, isFavorited, addEventToFavorites, removeEventToFavorites]);
 
   useEffect(() => {
     if (event) {
-      console.log("event", event);
-
       setEventDetails(event);
-
       if (event.lote) {
         setListLotes(event.lote);
       }
@@ -46,24 +51,33 @@ const EventDetail: FC = (): ReactElement => {
 
   useEffect(() => {
     if (event && quantity) {
-      const calcularValorTotal = () => {
-        let total = 0;
-
-        if (event.lote && Array.isArray(event.lote)) {
-          event.lote.forEach((lote) => {
-            const { title, value } = lote;
-            const qtd = quantity[title] || 0;
-            total += qtd * value;
-          });
-        }
-
-        return total;
-      };
-
-      const novoValorTotal = calcularValorTotal();
-      setValorTotal(novoValorTotal);
+      let total = 0;
+      if (event.lote && Array.isArray(event.lote)) {
+        event.lote.forEach((lote) => {
+          const { title, value } = lote;
+          const qtd = quantity[title] || 0;
+          total += qtd * value;
+        });
+      }
+      setValorTotal(total);
     }
   }, [event, quantity]);
+
+  // useFocusEffect(() => {
+  //   if (event !== null) {
+  //     const checkIsFavorite = favoriteEvents.some((el) => el.id === event.id);
+  //     setIsFavorited(checkIsFavorite);
+  //   }
+  // }, [favoriteEvents, event]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (event !== null) {
+        const checkIsFavorite = favoriteEvents.some((el) => el.id === event.id);
+        setIsFavorited(checkIsFavorite);
+      }
+    }, [favoriteEvents, event])
+  );
 
   return (
     <S.Container>
@@ -76,22 +90,29 @@ const EventDetail: FC = (): ReactElement => {
       </View>
 
       <S.InfoEvent>
-        <S.TitleEvent>{eventDetails.title}</S.TitleEvent>
+        <S.SectionTitle>
+          <S.TitleEvent>{eventDetails.title}</S.TitleEvent>
+
+          <S.SectionFavorite onPress={handleFavoriteEvents}>
+            <MaterialCommunityIcons
+              name={isFavorited ? "heart-multiple" : "heart-multiple-outline"}
+              size={30}
+              color={isFavorited ? "#e50303" : "#7c7c7c"}
+              style={{ marginTop: 10 }}
+            />
+          </S.SectionFavorite>
+        </S.SectionTitle>
 
         <Details data={eventDetails} />
-
         <Divider />
-
         <Description description={eventDetails.description} />
-
         {eventDetails.date && <Timer data={eventDetails} />}
-
         {listLotes.length > 0 && (
           <>
             <S.ListLotes>
-              {listLotes.map((item) => {
-                return <Lotes key={item.id} updateLoteCount={updateLoteCount} {...item} />;
-              })}
+              {listLotes.map((item) => (
+                <Lotes key={item.id} updateLoteCount={updateLoteCount} {...item} />
+              ))}
             </S.ListLotes>
 
             <S.SectionTotal>

@@ -11,7 +11,8 @@ export interface useAuthStoreProps {
   user: IUser | null;
   signIn: (email: string, password: string) => Promise<IUser | null>;
   signUp: (email: string, password: string) => Promise<IUser | null>;
-  signOut: () => void;
+  signOut: () => Promise<void>;
+  loadFromStorageAuth: () => Promise<void>;
 }
 
 const useAuthStore = create<useAuthStoreProps>((set) => ({
@@ -35,10 +36,6 @@ const useAuthStore = create<useAuthStoreProps>((set) => ({
     try {
       const auth = await authService.signUp(email, password);
 
-      set({ user: auth });
-
-      AsyncStorage.setItem("@AuthData", JSON.stringify(auth));
-
       return auth;
     } catch (error: any) {
       console.log("error", error);
@@ -46,12 +43,20 @@ const useAuthStore = create<useAuthStoreProps>((set) => ({
       return null;
     }
   },
-  signOut: () => {
-    set({ user: null });
-    AsyncStorage.removeItem("@AuthData");
+  signOut: async () => {
+    try {
+      const auth = await authService.signOutService();
+
+      if (auth) {
+        set({ user: null });
+        AsyncStorage.removeItem("@AuthData");
+      }
+    } catch (error: any) {
+      console.log("error", error);
+    }
   },
 
-  loadFromStorage: async () => {
+  loadFromStorageAuth: async () => {
     const auth = await AsyncStorage.getItem("@AuthData");
 
     if (auth) {

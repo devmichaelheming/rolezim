@@ -6,11 +6,11 @@ import { Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { formatandoMoeda } from "../../../../../utils/funcoes";
 
-interface LotesComponent extends LoteProps {
+interface ILotesComponent extends LoteProps {
   updateLoteCount: (idEvent: string, titleLote: string, count: number) => void;
 }
 
-const Lotes: FC<LotesComponent> = ({ id, title, value, updateLoteCount }): ReactElement => {
+const Lotes: FC<ILotesComponent> = ({ id, title, value, updateLoteCount }): ReactElement => {
   const [count, setCount] = useState(0);
 
   const incrementCounter = () => {
@@ -30,7 +30,7 @@ const Lotes: FC<LotesComponent> = ({ id, title, value, updateLoteCount }): React
       <S.InfoLote>
         <S.TitleLote>{title}</S.TitleLote>
 
-        <S.ValueLote>R$ {formatandoMoeda(value)}</S.ValueLote>
+        <S.ValueLote>{formatandoMoeda(value)}</S.ValueLote>
 
         <S.DescriptionLote>em até 12x sem juros</S.DescriptionLote>
       </S.InfoLote>

@@ -4,11 +4,11 @@ import S from "./styles";
 import { ItemProps } from "~/Models";
 import { calculateTimeRemaining } from "../../_funcoes";
 
-interface TimerProps {
+interface ITimer {
   data: ItemProps;
 }
 
-const Timer: FC<TimerProps> = ({ data }): ReactElement => {
+const Timer: FC<ITimer> = ({ data }): ReactElement => {
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining(data.date || ""));
 
   useEffect(() => {

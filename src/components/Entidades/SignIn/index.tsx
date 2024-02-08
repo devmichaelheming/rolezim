@@ -12,8 +12,8 @@ import useAuthStore from "~/stores/useAuthStore";
 const SignIn = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const { signIn } = useAuthStore();
-  const [email, setEmail] = useState("Joao@gmail.com");
-  const [password, setPassword] = useState("123456789");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState({
     email: "",
     password: "",
@@ -47,11 +47,7 @@ const SignIn = () => {
         return;
       }
 
-      const auth = await signIn(email, password);
-
-      if (auth) {
-        Alert.alert("Logado com sucesso!");
-      }
+      await signIn(email, password);
     } catch (error) {
       console.log("err", error);
     } finally {
@@ -61,6 +57,10 @@ const SignIn = () => {
 
   const handleSignUp = async () => {
     navigation.navigate("SignUp");
+    setError({
+      email: "",
+      password: "",
+    });
   };
 
   const clearError = (field: string) => {

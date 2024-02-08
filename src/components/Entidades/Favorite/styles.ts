@@ -34,17 +34,6 @@ export const Header = styled(View)`
   background-color: ${theme.primary};
   display: flex;
   align-items: center;
-
-  /* padding-top: ${Dimensions.get("window").height * 0.002}px;
-  width: 100%;
-  position: fixed;
-  top: 0px;
-  background-color: ${theme.primary};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 10px;
-  flex-direction: row; */
 `;
 
 export const TitleHeader = styled(Text)`
@@ -59,6 +48,7 @@ export const ContainerListFavorite = styled(View)`
   height: 100%;
   align-items: center;
   justify-content: flex-start;
+  padding-bottom: 65px;
 `;
 
 export const ListFavorite = styled(FlatList)`

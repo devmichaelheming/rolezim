@@ -1,10 +1,17 @@
-import styled from "styled-components";
-import { View, Text, TouchableOpacity, Image, TextInput, FlatList, Dimensions } from "react-native";
+import styled from "styled-components/native";
+import { View, Text, TouchableOpacity, TextInput, FlatList, Dimensions } from "react-native";
 import theme from "~/styles/theme";
 
-export const Container = styled(View)`
-  width: 95%;
-  top: ${Dimensions.get("window").height * 0.1}px;
+interface IContainer {
+  visibleSearch: boolean;
+}
+
+export const Container = styled(View)<IContainer>`
+  width: 98%;
+  top: ${({ visibleSearch }) =>
+    visibleSearch
+      ? `${Dimensions.get("window").height * 0.1}px`
+      : `${Dimensions.get("window").height * 0.1}px`};
   align-items: center;
   justify-content: center;
   margin: 0 auto;
@@ -77,6 +84,7 @@ export const SectionCategory = styled(View)`
   align-items: center;
   justify-content: space-between;
   margin: 24px 0;
+  padding: 0 4px;
 `;
 
 export const TitleSection = styled(Text)`

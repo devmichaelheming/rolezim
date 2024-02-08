@@ -9,6 +9,7 @@ import theme from "~/styles/theme";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import EventDetail from "~/components/Entidades/EventDetail";
 import { useIsFocused } from "@react-navigation/native";
+import { Platform } from "react-native";
 
 const AppRoutes = () => {
   const Tab = createBottomTabNavigator();
@@ -50,7 +51,7 @@ const AppRoutes = () => {
       screenOptions={{
         tabBarStyle: {
           backgroundColor: theme.primary,
-          height: 70,
+          height: Platform.OS === "ios" ? 70 : 60,
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
         },
@@ -65,11 +66,23 @@ const AppRoutes = () => {
           tabBarVisible: !isFocused, // Oculta a barra quando estiver na tela EventDetail
           tabBarIcon({ focused, size, color }) {
             if (focused) {
-              return <Ionicons size={26} color="#FFF" name="home" style={{ marginTop: 15 }} />;
+              return (
+                <Ionicons
+                  size={26}
+                  color="#FFF"
+                  name="home"
+                  style={{ marginTop: Platform.OS === "ios" ? 15 : 0 }}
+                />
+              );
             }
 
             return (
-              <Ionicons size={size} color="#FFF" name="home-outline" style={{ marginTop: 15 }} />
+              <Ionicons
+                size={size}
+                color="#FFF"
+                name="home-outline"
+                style={{ marginTop: Platform.OS === "ios" ? 15 : 0 }}
+              />
             );
           },
         })}
@@ -83,11 +96,23 @@ const AppRoutes = () => {
           headerShown: false,
           tabBarIcon({ focused, size, color }) {
             if (focused) {
-              return <Ionicons size={26} color="#FFF" name="heart" style={{ marginTop: 15 }} />;
+              return (
+                <Ionicons
+                  size={26}
+                  color="#FFF"
+                  name="heart"
+                  style={{ marginTop: Platform.OS === "ios" ? 15 : 0 }}
+                />
+              );
             }
 
             return (
-              <Ionicons size={size} color="#FFF" name="heart-outline" style={{ marginTop: 15 }} />
+              <Ionicons
+                size={size}
+                color="#FFF"
+                name="heart-outline"
+                style={{ marginTop: Platform.OS === "ios" ? 15 : 0 }}
+              />
             );
           },
         }}
@@ -101,10 +126,24 @@ const AppRoutes = () => {
           headerShown: false,
           tabBarIcon({ focused, size, color }) {
             if (focused) {
-              return <FontAwesome size={32} color="#FFF" name="user" style={{ marginTop: 15 }} />;
+              return (
+                <FontAwesome
+                  size={32}
+                  color="#FFF"
+                  name="user"
+                  style={{ marginTop: Platform.OS === "ios" ? 15 : 0 }}
+                />
+              );
             }
 
-            return <FontAwesome size={30} color="#FFF" name="user-o" style={{ marginTop: 15 }} />;
+            return (
+              <FontAwesome
+                size={30}
+                color="#FFF"
+                name="user-o"
+                style={{ marginTop: Platform.OS === "ios" ? 15 : 0 }}
+              />
+            );
           },
         }}
       />

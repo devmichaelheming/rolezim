@@ -2,10 +2,10 @@ import { Text, View } from "react-native";
 import styled from "styled-components";
 
 export const InfoDetails = styled(View)`
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  column-gap: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  row-gap: 8px;
   padding: 10px 0 5px 0;
 `;
 
