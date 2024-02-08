@@ -1,15 +1,17 @@
+import { Dispatch, SetStateAction } from "react";
 import { ItemProps } from "~/Models";
 
 export interface ICategory {
   id: string;
   title: string;
   icon: HTMLImageElement;
+  value: string;
 }
 
 export interface IRecents {
   id: string;
   title: string;
-  data?: string;
+  date?: string;
   location: string;
   img: HTMLImageElement;
 }

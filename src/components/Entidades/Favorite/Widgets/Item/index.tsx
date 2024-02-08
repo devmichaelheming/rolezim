@@ -1,10 +1,29 @@
 import React, { FC, ReactElement } from "react";
-import { Image, Alert } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import S from "./styles";
 import { ItemProps } from "~/Models";
+import useEventStore from "~/stores/useEventStore";
+import { ParamListBase, useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { convertDate } from "../../../../../utils/funcoes";
+import Image from "~/components/Image";
 
-const Item: FC<ItemProps> = ({ title, img, location, data }): ReactElement => {
+interface IFavoriteItem {
+  item: ItemProps;
+}
+
+const Item: FC<IFavoriteItem> = ({ item }): ReactElement => {
+  const { removeEventToFavorites, selectedEvent } = useEventStore();
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
+  const { id, img, location, title, date, lote } = item;
+
+  const handleRedirectDetails = () => {
+    selectedEvent(item);
+
+    navigation.navigate("EventDetail");
+  };
+
   return (
     <S.Container>
       <S.SectionIcon>
@@ -12,15 +31,15 @@ const Item: FC<ItemProps> = ({ title, img, location, data }): ReactElement => {
       </S.SectionIcon>
 
       <S.Body>
-        <S.Details>
+        <S.Details onPress={() => handleRedirectDetails()}>
           <S.Title>{title}</S.Title>
 
-          {data && <S.TitleData>{data}</S.TitleData>}
+          {date && <S.TitleData>{convertDate(date)}</S.TitleData>}
 
           {location && <S.TitleLocation>{location}</S.TitleLocation>}
         </S.Details>
 
-        <S.RemoveItem onPress={() => Alert.alert(title)}>
+        <S.RemoveItem onPress={() => removeEventToFavorites(id)}>
           <AntDesign name="close" size={24} color="#000000a4" />
         </S.RemoveItem>
       </S.Body>

@@ -1,17 +1,38 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
 interface IButton extends TouchableOpacityProps {
-  type: "default" | "text";
+  type: "text" | "primary" | "secondary";
   size?: number;
+  revert?: boolean;
 }
 
 import theme from "~/styles/theme";
 
 export const Button = styled(TouchableOpacity)<IButton>`
   width: 100%;
-  background-color: ${({ type }) => (type === "default" ? theme.primary : "transparent")};
+
+  ${({ type }) =>
+    type === "text" &&
+    css`
+      background-color: transparent;
+      border-color: transparent;
+    `};
+
+  ${({ type }) =>
+    type === "primary" &&
+    css`
+      background-color: ${theme.primary};
+      border-color: ${theme.primary};
+    `};
+
+  ${({ type }) =>
+    type === "secondary" &&
+    css`
+      background-color: transparent;
+      border-color: ${theme.primary};
+    `};
+
   border-width: 1px;
-  border-color: ${({ type }) => (type === "default" ? theme.primary : "transparent")};
   height: 55px;
   border-radius: 6px;
   align-items: center;
@@ -20,7 +41,7 @@ export const Button = styled(TouchableOpacity)<IButton>`
 `;
 
 export const TextButton = styled(Text)<IButton>`
-  color: ${({ type }) => (type === "default" ? "#FFF" : theme.primary)};
+  color: ${({ type }) => (type === "primary" && "secondary" ? "#FFF" : theme.primary)};
   font-size: ${({ size }) => `${size}px`};
   font-weight: 600;
 `;

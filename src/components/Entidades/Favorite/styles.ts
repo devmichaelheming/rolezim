@@ -26,8 +26,8 @@ export const TextButton = styled(Text)`
 `;
 
 export const Header = styled(View)`
-  padding-top: ${Dimensions.get("window").height * 0.06}px;
-  padding-bottom: 20px;
+  padding-top: ${Dimensions.get("window").height * 0.04}px;
+  padding-bottom: 10px;
   width: 100%;
   position: fixed;
   top: 0px;
@@ -39,7 +39,7 @@ export const Header = styled(View)`
 export const TitleHeader = styled(Text)`
   color: #ffffffe1;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 export const ContainerListFavorite = styled(View)`
@@ -48,6 +48,7 @@ export const ContainerListFavorite = styled(View)`
   height: 100%;
   align-items: center;
   justify-content: flex-start;
+  padding-bottom: 65px;
 `;
 
 export const ListFavorite = styled(FlatList)`

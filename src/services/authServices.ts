@@ -3,9 +3,10 @@ import {
   User,
   UserCredential,
   createUserWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { VerifyErroCode } from "../utils/verifyCodeError";
-import { IUser } from "../lib/stores/useAuthStore";
+import { IUser } from "~/stores/useAuthStore";
 import { auth } from "./firebaseConfig";
 import { Alert } from "react-native";
 
@@ -69,4 +70,16 @@ async function signUp(email: string, password: string): Promise<IUser | null> {
     });
 }
 
-export const authService = { signIn, signUp };
+async function signOutService() {
+  return await signOut(auth)
+    .then(() => {
+      console.log("deslogou");
+      return true;
+    })
+    .catch((error) => {
+      console.log("error service", error);
+      return false;
+    });
+}
+
+export const authService = { signIn, signUp, signOutService };

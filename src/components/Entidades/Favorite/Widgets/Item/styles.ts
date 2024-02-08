@@ -48,7 +48,7 @@ export const Title = styled(Text)`
   padding-bottom: 4px;
 `;
 
-export const Details = styled(View)`
+export const Details = styled(TouchableOpacity)`
   flex-direction: column;
 `;
 
