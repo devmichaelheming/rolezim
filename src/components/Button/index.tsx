@@ -9,7 +9,14 @@ interface IButton extends TouchableOpacityProps {
   size?: number;
 }
 
-const Button = ({ type = "primary", onPress, children, size = 18, ...rest }: IButton) => {
+const Button = ({
+  type = "primary",
+  onPress,
+  children,
+  size = 18,
+  ...rest
+}: IButton) => {
+  console.log("s");
   return (
     <S.Button type={type} onPress={onPress} {...rest}>
       <S.TextButton type={type} size={size}>
